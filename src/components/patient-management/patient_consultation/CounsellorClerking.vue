@@ -3,21 +3,19 @@
     <div class="header" style="margin-bottom: 4rem; margin-top: 1rem;">
       <img src="./kkmLogo.png" style="width: 200px;">
       <h2 style="margin-top: 2rem;">
-      <span contenteditable @keydown="preventLineBreaks">Counsellor Clerking Note</span>
+        <span contenteditable @keydown="preventLineBreaks">Counsellor Clerking Note</span>
       </h2>
-      
-      <img src="./mentariLogo.png" style="width: 200px; height: auto;">      
+
+      <img src="./mentariLogo.png" style="width: 200px; height: auto;">
     </div>
-    
+
     <div class="hide-in-print">
       This is Counsellor Clerking Note template. This will hide in print.
     </div>
-        <!-- <div class="hide-in-print" style="margin-bottom: 10px;">
-          This is Psychiatric Clerking Note template.<br>You can modify the fields highlighted in green and interact with the buttons without having them in the print. 
+    <!-- <div class="hide-in-print" style="margin-bottom: 10px;">
+          This is Psychiatric Clerking Note template.<br>You can modify the fields highlighted in green and interact with the buttons without having them in the print.
         </div> -->
 
-      
-    
     <table>
       <thead>
         <tr>
@@ -35,7 +33,7 @@
             <div><b>AGE:</b> <span contenteditable @keydown="preventLineBreaks">40</span></div>
             <div><b>CONTACT NO.:</b> <span contenteditable @keydown="preventLineBreaks">012-3456789</span></div>
             <div><b>DATE:</b> <span contenteditable @keydown="preventLineBreaks">{{today}}</span></div>
-            <div><b>TIME:</b> <span contenteditable @keydown="preventLineBreaks">9:00 AM</span></div>            
+            <div><b>TIME:</b> <span contenteditable @keydown="preventLineBreaks">9:00 AM</span></div>
           </td>
           <!-- CONTOH UNTUK ALL TEXT EDITABLE-->
           <!--<td contenteditable>
@@ -84,10 +82,10 @@
       <tbody>
         <tr v-for="(item, i) of items" :key="item.key">
           <td><div class="left-btn hide-in-print" @click="() => items.splice(i, 1)">➖</div>{{i+1}}</td>
-          <td contenteditable>{{item.desc}}</td>        
+          <td contenteditable>{{item.desc}}</td>
         </tr>
         <tr>
-          <td><div v-if="items.length < 5" class="left-btn hide-in-print" @click="() => items.push({ key: Math.random(), ref: 'MyRef', desc: 'Enter Diagnosis 2', qty: 1, price: 0 })">➕</div></td>          
+          <td><div v-if="items.length < 5" class="left-btn hide-in-print" @click="() => items.push({ key: Math.random(), ref: 'MyRef', desc: 'Enter Diagnosis 2', qty: 1, price: 0 })">➕</div></td>
         </tr>
 
       </tbody>
@@ -100,50 +98,50 @@
 </template>
 
 <script>
-import Table from '@/components/Table.vue';
+import Table from '@/components/Table.vue'
 export default {
   props: {
-    invoice_number: String
+    invoice_number: String,
   },
   data () {
     return {
       is_shipping_identical: true,
-      billing_address: "<b>M. John Doe</b><br>98 Ooezfjefoi Laozdij<br>09823 Ljeiznr<br>FOPKSOFOF<br>AC310592815039",
-      items: [{ key: Math.random(), ref: "X3000", desc: "Enter Diagnosis", qty: 1, price: 299 }],
+      billing_address: '<b>M. John Doe</b><br>98 Ooezfjefoi Laozdij<br>09823 Ljeiznr<br>FOPKSOFOF<br>AC310592815039',
+      items: [{ key: Math.random(), ref: 'X3000', desc: 'Enter Diagnosis', qty: 1, price: 299 }],
       tax_percent: 20,
-      shipping: 15
+      shipping: 15,
     }
   },
   mounted () {
     // initialize contenteditable fields manually
-    this.$refs.billing_address.innerHTML = this.billing_address;
-    this.$refs.tax_percent.innerHTML = this.tax_percent;
-    this.$refs.shipping.innerHTML = this.shipping+".00";
+    this.$refs.billing_address.innerHTML = this.billing_address
+    this.$refs.tax_percent.innerHTML = this.tax_percent
+    this.$refs.shipping.innerHTML = this.shipping + '.00'
   },
   computed: {
     today () {
-      var date = new Date();
-      return date.toJSON().slice(0,10).replace(/-/g,'.');
+      var date = new Date()
+      return date.toJSON().slice(0, 10).replace(/-/g, '.')
     },
     todayTime () {
-      var date = new Time();
-      return date.toJSON().slice(0,10).replace(/-/g,'.');
+      var date = new Time()
+      return date.toJSON().slice(0, 10).replace(/-/g, '.')
     },
     next_month () {
-      var date = new Date();
-      date.setDate(date.getDate() + 30);
-      return date.toJSON().slice(0,10).replace(/-/g,'.');
+      var date = new Date()
+      date.setDate(date.getDate() + 30)
+      return date.toJSON().slice(0, 10).replace(/-/g, '.')
     },
     sub_total () {
-      return this.items.reduce((acc, item) => acc += item.qty * item.price, 0);
+      return this.items.reduce((acc, item) => acc += item.qty * item.price, 0)
     },
     total () {
-      return this.sub_total * (1 + this.tax_percent/100) + this.shipping;
-    }
+      return this.sub_total * (1 + this.tax_percent / 100) + this.shipping
+    },
   },
   methods: {
-    preventLineBreaks (e) { if(e.which == 13) e.preventDefault(); }
-  }
+    preventLineBreaks (e) { if (e.which === 13) e.preventDefault() },
+  },
 }
 </script>
 

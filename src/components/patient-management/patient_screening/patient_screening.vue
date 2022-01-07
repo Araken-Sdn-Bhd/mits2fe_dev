@@ -87,7 +87,7 @@ export default {
     window.addEventListener(
       'touchstart',
       (e) => {
-        if (e.touches.length == 2) {
+        if (e.touches.length === 2) {
           e.preventDefault()
           start_dist_touch = Math.hypot(
             e.touches[0].pageX - e.touches[1].pageX,
@@ -322,7 +322,7 @@ export default {
             return {
               text,
               active:
-                this.page_format_mm[0] == w && this.page_format_mm[1] == h,
+                this.page_format_mm[0] === w && this.page_format_mm[1] === h,
               click: () => {
                 this.page_format_mm = [w, h]
               },
@@ -340,7 +340,7 @@ export default {
           menu: this.margins.map(([text, value]) => {
             return {
               text: text + ' (' + value + ')',
-              active: this.page_margins == value,
+              active: this.page_margins === value,
               click: () => {
                 this.page_margins = value
               },
@@ -366,7 +366,7 @@ export default {
           ].map(([text, zoom]) => {
             return {
               text,
-              active: this.zoom == zoom,
+              active: this.zoom === zoom,
               click: () => {
                 this.zoom = zoom
               },
@@ -380,30 +380,30 @@ export default {
           // Display mode menu
           title: 'Display',
           icon:
-            this.display == 'horizontal'
+            this.display === 'horizontal'
               ? 'view_column'
-              : this.display == 'vertical'
+              : this.display === 'vertical'
                 ? 'view_stream'
                 : 'view_module',
           chevron: true,
           menu: [
             {
               icon: 'view_module',
-              active: this.display == 'grid',
+              active: this.display === 'grid',
               click: () => {
                 this.display = 'grid'
               },
             },
             {
               icon: 'view_column',
-              active: this.display == 'horizontal',
+              active: this.display === 'horizontal',
               click: () => {
                 this.display = 'horizontal'
               },
             },
             {
               icon: 'view_stream',
-              active: this.display == 'vertical',
+              active: this.display === 'vertical',
               click: () => {
                 this.display = 'vertical'
               },
@@ -418,8 +418,8 @@ export default {
     current_format_name () {
       const format = this.formats.find(
         ([, width_mm, height_mm]) =>
-          this.page_format_mm[0] == width_mm &&
-          this.page_format_mm[1] == height_mm,
+          this.page_format_mm[0] === width_mm &&
+          this.page_format_mm[1] === height_mm,
       )
       return format
         ? format[0]
@@ -444,7 +444,7 @@ export default {
     // Margins management
     current_margins_name () {
       const margins = this.margins.find(
-        ([, margins]) => this.page_margins == margins,
+        ([, margins]) => this.page_margins === margins,
       )
       return margins ? margins[0] : margins[1]
     },
@@ -482,26 +482,26 @@ export default {
       const fontWeight = this.current_text_style.fontWeight
       return (
         fontWeight &&
-        (parseInt(fontWeight) > 400 || fontWeight.indexOf('bold') == 0)
+        (parseInt(fontWeight) > 400 || fontWeight.indexOf('bold') === 0)
       )
     },
     isItalic () {
-      return this.current_text_style.fontStyle == 'italic'
+      return this.current_text_style.fontStyle === 'italic'
     },
     isUnderline () {
       // text-decoration is not overridden by children, so we query the parent stack
       const stack = this.current_text_style.textDecorationStack
-      return stack && stack.some((d) => d.indexOf('underline') == 0)
+      return stack && stack.some((d) => d.indexOf('underline') === 0)
     },
     isStrikeThrough () {
       // text-decoration is not overridden by children, so we query the parent stack
       const stack = this.current_text_style.textDecorationStack
-      return stack && stack.some((d) => d.indexOf('line-through') == 0)
+      return stack && stack.some((d) => d.indexOf('line-through') === 0)
     },
     isNumberedList () {
       return (
         this.current_text_style.isList &&
-        this.current_text_style.listStyleType == 'decimal'
+        this.current_text_style.listStyleType === 'decimal'
       )
     },
     isBulletedList () {
@@ -511,13 +511,13 @@ export default {
       )
     },
     isH1 () {
-      return this.current_text_style.headerLevel == 1
+      return this.current_text_style.headerLevel === 1
     },
     isH2 () {
-      return this.current_text_style.headerLevel == 2
+      return this.current_text_style.headerLevel === 2
     },
     isH3 () {
-      return this.current_text_style.headerLevel == 3
+      return this.current_text_style.headerLevel === 3
     },
     curColor () {
       return this.current_text_style.color || 'transparent'
@@ -592,7 +592,7 @@ export default {
             match.index + match[0].length,
           )
           // insert <br> to empty pages that would not be handled correctly by contenteditable
-          if (content_plus_tags_close.indexOf('</') == 0) {
+          if (content_plus_tags_close.indexOf('</') === 0) {
             content_plus_tags_close = '<br>' + content_plus_tags_close
           }
           this.content.splice(

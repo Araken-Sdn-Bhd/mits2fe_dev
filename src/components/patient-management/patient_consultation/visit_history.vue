@@ -1,11 +1,11 @@
 <template>
   <va-card :title="$t('Visit History')">
-      <div class="flex  md3 offset--md11 ">
+    <div class="flex  md3 offset--md11 ">
       <router-link to="/admin/patient-management/visit_note">
         <va-button  icon="fa fa-plus"></va-button>
       </router-link>
     </div>
-    
+
     <va-data-table
       :fields="fields"
       :data="filteredData"
@@ -17,13 +17,13 @@
         <va-icon :name="getTrendIcon(props.rowData)" :color="getTrendColor(props.rowData)" />
       </template>
 
-        <template slot="icon">
+      <template slot="icon">
         <va-icon name="fa fa-trash" color="secondary" />
       </template>
       <template slot="icon2">
         <va-icon name="fa fa-edit" color="secondary" />
       </template>
-      
+
       <template slot="status" slot-scope="props">
         <va-badge :color="props.rowData.color">
           {{ props.rowData.status }}
@@ -50,16 +50,16 @@ export default {
     }
   },
   formOptions: {
-        // validationErrorClass: "has-error",
-        // validationSuccessClass: "has-`success`",
-        validateAfterChanged: true,
-      },
-  thirdTabSchema:{
-        groups: [
+    // validationErrorClass: "has-error",
+    // validationSuccessClass: "has-`success`",
+    validateAfterChanged: true,
+  },
+  thirdTabSchema: {
+    groups: [
+      {
+        styleClasses: 'row',
+        fields: [
           {
-          styleClasses: "row",
-          fields: [
-           {
             type: 'input',
             inputType: 'date',
             label: 'Date  ',
@@ -68,7 +68,7 @@ export default {
             required: true,
             styleClasses: 'col-md-4',
           },
-             {
+          {
             type: 'vueMultiSelect',
             model: 'services',
             label: 'Services',
@@ -82,13 +82,13 @@ export default {
               label: 'name',
               searchable: true,
             },
-          values: (model, schema) => {
-            return this.services
-          }
+            values: (model, schema) => {
+              return this.services
+            },
           },
-          ],
-        }],
-      },
+        ],
+      }],
+  },
   computed: {
     fields () {
       return [{
@@ -133,10 +133,10 @@ export default {
       })
     },
   },
-   model: {
-        show1: true,
-        services: '',
-   },
+  model: {
+    show1: true,
+    services: '',
+  },
   methods: {
     getTrendIcon (user) {
       if (user.trend === 'up') {
