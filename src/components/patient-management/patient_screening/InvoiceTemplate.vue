@@ -97,43 +97,43 @@
 <script>
 export default {
   props: {
-    invoice_number: String
+    invoice_number: String,
   },
   data () {
     return {
       is_shipping_identical: true,
-      billing_address: "<b>M. John Doe</b><br>98 Ooezfjefoi Laozdij<br>09823 Ljeiznr<br>FOPKSOFOF<br>AC310592815039",
-      items: [{ key: Math.random(), ref: "X3000", desc: "My great product", qty: 1, price: 299 }],
+      billing_address: '<b>M. John Doe</b><br>98 Ooezfjefoi Laozdij<br>09823 Ljeiznr<br>FOPKSOFOF<br>AC310592815039',
+      items: [{ key: Math.random(), ref: 'X3000', desc: 'My great product', qty: 1, price: 299 }],
       tax_percent: 20,
-      shipping: 15
+      shipping: 15,
     }
   },
   mounted () {
     // initialize contenteditable fields manually
-    this.$refs.billing_address.innerHTML = this.billing_address;
-    this.$refs.tax_percent.innerHTML = this.tax_percent;
-    this.$refs.shipping.innerHTML = this.shipping+".00";
+    this.$refs.billing_address.innerHTML = this.billing_address
+    this.$refs.tax_percent.innerHTML = this.tax_percent
+    this.$refs.shipping.innerHTML = this.shipping + '.00'
   },
   computed: {
     today () {
-      var date = new Date();
-      return date.toJSON().slice(0,10).replace(/-/g,'.');
+      var date = new Date()
+      return date.toJSON().slice(0, 10).replace(/-/g, '.')
     },
     next_month () {
-      var date = new Date();
-      date.setDate(date.getDate() + 30);
-      return date.toJSON().slice(0,10).replace(/-/g,'.');
+      var date = new Date()
+      date.setDate(date.getDate() + 30)
+      return date.toJSON().slice(0, 10).replace(/-/g, '.')
     },
     sub_total () {
-      return this.items.reduce((acc, item) => acc += item.qty * item.price, 0);
+      return this.items.reduce((acc, item) => acc += item.qty * item.price, 0)
     },
     total () {
-      return this.sub_total * (1 + this.tax_percent/100) + this.shipping;
-    }
+      return this.sub_total * (1 + this.tax_percent / 100) + this.shipping
+    },
   },
   methods: {
-    preventLineBreaks (e) { if(e.which == 13) e.preventDefault(); }
-  }
+    preventLineBreaks (e) { if (e.which === 13) e.preventDefault() },
+  },
 }
 </script>
 

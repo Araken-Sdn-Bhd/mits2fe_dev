@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 <template>
   <div class="">
     <!-- <div class="container-fluid"> -->
@@ -152,7 +153,7 @@
           <!-- </div> -->
           <br /><br /><br />
           <va-card>
-            <div class=" justify-content-center">
+            <div class="justify-content-center">
               <va-data-table
                 :fields="fields"
                 :data="filteredData"
@@ -171,7 +172,7 @@
                       class="badge badge-primary mr-2"
                     >
                       <i class="fa fa-edit"></i
-                    ></span>
+                      ></span>
                   </h4>
                   <h4 class="mt-2">
                     <span
@@ -181,7 +182,7 @@
                       class="badge badge-danger mr-1"
                     >
                       <i class="fa fa-minus-circle"></i
-                    ></span>
+                      ></span>
                   </h4>
                 </template>
               </va-data-table>
@@ -204,431 +205,431 @@
 </template>
 
 <script>
-import FullCalendar from "@fullcalendar/vue";
-import dayGridPlugin from "@fullcalendar/daygrid";
-import interactionPlugin from "@fullcalendar/interaction";
-import Vudal from "vudal";
-//import VfgFunctionalDate from "../../component/VfgFunctionalCalendar.vue";
-import Vue from "vue";
-//import * as servicesModule0 from "../../../app/module0/services";
-import moment from "moment";
-import { debounce } from "lodash";
-Vue.component("field-vfg-functional-date", VfgFunctionalDate);
+import FullCalendar from '@fullcalendar/vue'
+import dayGridPlugin from '@fullcalendar/daygrid'
+import interactionPlugin from '@fullcalendar/interaction'
+import Vudal from 'vudal'
+// import VfgFunctionalDate from "../../component/VfgFunctionalCalendar.vue";
+import Vue from 'vue'
+// import * as servicesModule0 from "../../../app/module0/services";
+import moment from 'moment'
+import { debounce } from 'lodash'
+Vue.component('field-vfg-functional-date', VfgFunctionalDate)
 export default {
   components: {
     FullCalendar, // make the <FullCalendar> tag available
-    Vudal
+    Vudal,
   },
 
-  mounted() {
-    this.getAllException();
+  mounted () {
+    this.getAllException()
   },
 
   computed: {
-    fields() {
+    fields () {
       return [
         {
-          name: "__slot:marker",
-          width: "30px",
-          dataClass: "text-center"
+          name: '__slot:marker',
+          width: '30px',
+          dataClass: 'text-center',
         },
         {
-          name: "__slot:no",
-          title: "No"
+          name: '__slot:no',
+          title: 'No',
         },
         {
-          name: "CALENDAR_NAME",
-          title: "Name",
-          sortField: "CALENDAR_NAME"
+          name: 'CALENDAR_NAME',
+          title: 'Name',
+          sortField: 'CALENDAR_NAME',
           // width: "30%"
         },
         {
-          name: "CALENDAR_DATE_START",
-          title: "Start Date"
+          name: 'CALENDAR_DATE_START',
+          title: 'Start Date',
           // title: this.$t('tables.headings.date'),
           // width: "30%"
         },
         {
-          name: "CALENDAR_DATE_END",
-          title: "Finish Date"
+          name: 'CALENDAR_DATE_END',
+          title: 'Finish Date',
           // width: "40%"
         },
         {
-          name: "CALENDAR_DESCRIPTION",
-          title: "Description"
+          name: 'CALENDAR_DESCRIPTION',
+          title: 'Description',
           // width: "40%"
         },
         {
-          name: "__slot:actions",
-          title: "Action",
-          dataClass: "inline"
-        }
-      ];
+          name: '__slot:actions',
+          title: 'Action',
+          dataClass: 'inline',
+        },
+      ]
     },
-    filteredData() {
+    filteredData () {
       if (!this.term || this.term.length < 1) {
-        return this.holidayList;
+        return this.holidayList
       }
-      return this.holidayList.filter(item => {
+      return this.holidayList.filter((item) => {
         return this.term
           .toLowerCase()
-          .split(" ")
+          .split(' ')
           .every(
-            v =>
+            (v) =>
               item.CALENDAR_NAME.toLowerCase().includes(v) ||
               item.CALENDAR_DATE_START.toLowerCase().includes(v) ||
               item.CALENDAR_DATE_END.toLowerCase().includes(v) ||
-              item.CALENDAR_DESCRIPTION.toLowerCase().includes(v)
-          );
-      });
-    }
+              item.CALENDAR_DESCRIPTION.toLowerCase().includes(v),
+          )
+      })
+    },
   },
-  data() {
+  data () {
     return {
       id: null,
-      excelFile: "",
+      excelFile: '',
       term: null,
-      perPage: "6",
-      perPageOptions: ["4", "6", "10", "20"],
+      perPage: '6',
+      perPageOptions: ['4', '6', '10', '20'],
       calendarOptions: {
         plugins: [dayGridPlugin, interactionPlugin],
-        initialView: "dayGridMonth",
-        backgroundColor: "#ff0000",
-        eventColor: "red",
+        initialView: 'dayGridMonth',
+        backgroundColor: '#ff0000',
+        eventColor: 'red',
         dateClick: this.handleDateClick,
         eventClick: this.handleDateClick,
         events: [
-          { title: "cuti 1", date: "2020-12-21", display: "background" }
+          { title: 'cuti 1', date: '2020-12-21', display: 'background' },
           // { title: 'Available', date: '2020-12-12', display: 'background', },
         ],
-        dayRender: function(date, cell) {
-          var today = new Date();
+        dayRender: function (date, cell) {
+          var today = new Date()
           if (date.getDate() === today.getDate()) {
-            cell.css("background-color", "red");
+            cell.css('background-color', 'red')
           }
-        }
+        },
       },
       holidayList: [],
-      filter: "",
+      filter: '',
       currentPage: 1,
       perPageSelected: 5,
 
       editExceptionSchema: {
         groups: [
           {
-            styleClasses: "row",
+            styleClasses: 'row',
             fields: [
               {
-                type: "input",
-                inputType: "text",
-                label: "Name",
-                model: "modelEdit.CALENDAR_NAME",
-                placeholder: "Enter name",
+                type: 'input',
+                inputType: 'text',
+                label: 'Name',
+                model: 'modelEdit.CALENDAR_NAME',
+                placeholder: 'Enter name',
                 required: true,
-                validator: "string",
-                styleClasses: "col-md-12"
+                validator: 'string',
+                styleClasses: 'col-md-12',
               },
               {
-                labels: "Start Date",
-                type: "vfg-functional-date",
-                placeholder: "Start Date",
-                model: "modelEdit.CALENDAR_DATE_START",
+                labels: 'Start Date',
+                type: 'vfg-functional-date',
+                placeholder: 'Start Date',
+                model: 'modelEdit.CALENDAR_DATE_START',
                 noLabel: true,
-                format: "dd-MM-yyyy",
-                styleClasses: "col-md-12"
+                format: 'dd-MM-yyyy',
+                styleClasses: 'col-md-12',
                 // required: true,
                 // validator: "string"
               },
               {
-                labels: "Finish Date",
-                type: "vfg-functional-date",
-                placeholder: "Finish Date",
-                model: "modelEdit.CALENDAR_DATE_END",
+                labels: 'Finish Date',
+                type: 'vfg-functional-date',
+                placeholder: 'Finish Date',
+                model: 'modelEdit.CALENDAR_DATE_END',
                 noLabel: true,
-                format: "dd-MM-yyyy",
-                styleClasses: "col-md-12"
+                format: 'dd-MM-yyyy',
+                styleClasses: 'col-md-12',
                 // required: true,
                 // validator: "string"
               },
               {
-                type: "input",
-                inputType: "text",
-                label: "Description",
-                model: "modelEdit.CALENDAR_DESCRIPTION",
-                placeholder: "Enter discription",
+                type: 'input',
+                inputType: 'text',
+                label: 'Description',
+                model: 'modelEdit.CALENDAR_DESCRIPTION',
+                placeholder: 'Enter discription',
                 required: true,
-                validator: "string",
-                styleClasses: "col-md-12"
-              }
-            ]
-          }
-        ]
+                validator: 'string',
+                styleClasses: 'col-md-12',
+              },
+            ],
+          },
+        ],
       },
       addExceptionSchema: {
         groups: [
           {
-            styleClasses: "row",
+            styleClasses: 'row',
             fields: [
               {
-                type: "input",
-                inputType: "text",
-                label: "Name",
-                model: "modelAdd.CALENDAR_NAME",
-                placeholder: "Enter name",
+                type: 'input',
+                inputType: 'text',
+                label: 'Name',
+                model: 'modelAdd.CALENDAR_NAME',
+                placeholder: 'Enter name',
                 required: true,
-                validator: "string",
-                styleClasses: "col-md-12"
+                validator: 'string',
+                styleClasses: 'col-md-12',
               },
               {
-                labels: "Start Date",
-                type: "vfg-functional-date",
-                placeholder: "Start Date",
-                model: "modelAdd.CALENDAR_DATE_START",
+                labels: 'Start Date',
+                type: 'vfg-functional-date',
+                placeholder: 'Start Date',
+                model: 'modelAdd.CALENDAR_DATE_START',
                 typeable: false,
                 noClearButton: true,
-                format: "dd-MM-yyyy",
-                styleClasses: "col-md-12"
+                format: 'dd-MM-yyyy',
+                styleClasses: 'col-md-12',
                 // required: true,
                 // validator: "string"
               },
               {
-                labels: "Finish Date",
-                type: "vfg-functional-date",
-                placeholder: "Finish Date",
-                model: "modelAdd.CALENDAR_DATE_END",
+                labels: 'Finish Date',
+                type: 'vfg-functional-date',
+                placeholder: 'Finish Date',
+                model: 'modelAdd.CALENDAR_DATE_END',
                 typeable: false,
                 noClearButton: true,
-                format: "dd-MM-yyyy",
-                styleClasses: "col-md-12"
+                format: 'dd-MM-yyyy',
+                styleClasses: 'col-md-12',
                 //   required: true,
                 //   validator: "string"
               },
               {
-                type: "input",
-                inputType: "text",
-                label: "Description",
-                model: "modelAdd.CALENDAR_DESCRIPTION",
-                placeholder: "Enter discription",
+                type: 'input',
+                inputType: 'text',
+                label: 'Description',
+                model: 'modelAdd.CALENDAR_DESCRIPTION',
+                placeholder: 'Enter discription',
                 required: true,
-                validator: "string",
-                styleClasses: "col-md-12"
-              }
-            ]
-          }
-        ]
+                validator: 'string',
+                styleClasses: 'col-md-12',
+              },
+            ],
+          },
+        ],
       },
 
       schema: {
         groups: [
           {
-            styleClasses: "row",
+            styleClasses: 'row',
             fields: [
               {
-                type: "input",
-                inputType: "text",
-                model: "modelFilter.CALENDAR_NAME",
-                label: "Name",
-                styleClasses: "col-md-6"
+                type: 'input',
+                inputType: 'text',
+                model: 'modelFilter.CALENDAR_NAME',
+                label: 'Name',
+                styleClasses: 'col-md-6',
               },
               {
-                labels: "Start Date",
-                type: "vfg-functional-date",
-                placeholder: "Start Date",
-                model: "modelFilter.CALENDAR_DATE_START",
+                labels: 'Start Date',
+                type: 'vfg-functional-date',
+                placeholder: 'Start Date',
+                model: 'modelFilter.CALENDAR_DATE_START',
                 noLabel: true,
-                format: "dd-MM-yyyy",
-                styleClasses: "col-md-6"
+                format: 'dd-MM-yyyy',
+                styleClasses: 'col-md-6',
               },
               {
-                labels: "Finish Date",
-                type: "vfg-functional-date",
-                placeholder: "Finish Date",
-                model: "modelFilter.CALENDAR_DATE_END",
+                labels: 'Finish Date',
+                type: 'vfg-functional-date',
+                placeholder: 'Finish Date',
+                model: 'modelFilter.CALENDAR_DATE_END',
                 noLabel: true,
-                format: "dd-MM-yyyy",
-                styleClasses: "col-md-6"
+                format: 'dd-MM-yyyy',
+                styleClasses: 'col-md-6',
               },
               {
-                type: "input",
-                inputType: "text",
-                model: "modelFilter.CALENDAR_DESCRIPTION",
-                label: "Description",
-                styleClasses: "col-md-6"
-              }
-            ]
-          }
-        ]
+                type: 'input',
+                inputType: 'text',
+                model: 'modelFilter.CALENDAR_DESCRIPTION',
+                label: 'Description',
+                styleClasses: 'col-md-6',
+              },
+            ],
+          },
+        ],
       },
 
       formOptions: {
         // validationErrorClass: "has-error",
         // validationSuccessClass: "has-`success`",
-        validateAfterChanged: true
+        validateAfterChanged: true,
       },
 
       model: {
         modelAdd: {
-          CALENDAR_NAME: "",
+          CALENDAR_NAME: '',
           CALENDAR_DATE_START: null,
           CALENDAR_DATE_END: null,
-          CALENDAR_DESCRIPTION: ""
+          CALENDAR_DESCRIPTION: '',
         },
 
         modelEdit: {
           SETTING_CALENDAR_ID: null,
-          CALENDAR_NAME: "",
+          CALENDAR_NAME: '',
           CALENDAR_DATE_START: null,
           CALENDAR_DATE_END: null,
-          CALENDAR_DESCRIPTION: ""
+          CALENDAR_DESCRIPTION: '',
         },
 
         modelFilter: {
-          CALENDAR_NAME: "",
+          CALENDAR_NAME: '',
           CALENDAR_DATE_START: null,
           CALENDAR_DATE_END: null,
-          CALENDAR_DESCRIPTION: ""
-        }
+          CALENDAR_DESCRIPTION: '',
+        },
       },
 
-      dataExcel: []
-    };
+      dataExcel: [],
+    }
   },
 
   methods: {
-    search: debounce(function(term) {
-      this.term = term;
+    search: debounce(function (term) {
+      this.term = term
     }, 400),
-    async filterException() {
+    async filterException () {
       try {
-        //**** format date if date not null */
+        //* *** format date if date not null */
         if (this.model.modelFilter.CALENDAR_DATE_START != null) {
           this.model.modelFilter.CALENDAR_DATE_START = moment(
-            this.model.modelFilter.CALENDAR_DATE_START
-          ).format("YYYY-MM-DD");
+            this.model.modelFilter.CALENDAR_DATE_START,
+          ).format('YYYY-MM-DD')
         }
         if (this.model.modelFilter.CALENDAR_DATE_END != null) {
           this.model.modelFilter.CALENDAR_DATE_END = moment(
-            this.model.modelFilter.CALENDAR_DATE_END
-          ).format("YYYY-MM-DD");
+            this.model.modelFilter.CALENDAR_DATE_END,
+          ).format('YYYY-MM-DD')
         }
 
         const response = await servicesModule0.filterException(
-          this.model.modelFilter
-        );
-        if (response != "error") {
-          this.holidayList = response;
+          this.model.modelFilter,
+        )
+        if (response !== 'error') {
+          this.holidayList = response
         }
       } catch (error) {}
     },
-    async getAllException() {
-      const response = await servicesModule0.getAllExceptionList();
-      if (response != "error") {
-        this.holidayList = response;
+    async getAllException () {
+      const response = await servicesModule0.getAllExceptionList()
+      if (response !== 'error') {
+        this.holidayList = response
       }
     },
 
-    handleDateClick: function(calEvent, jsEvent, view) {
+    handleDateClick: function (calEvent, jsEvent, view) {
       // alert("testClick");
     },
 
-    addException() {
-      this.$modals.simpleModal.$show();
+    addException () {
+      this.$modals.simpleModal.$show()
     },
 
-    async add() {
+    async add () {
       if (this.$refs.exceptionForm.validate()) {
-        const data = new FormData();
-        data.append("CALENDAR_NAME", this.model.modelAdd.CALENDAR_NAME);
+        const data = new FormData()
+        data.append('CALENDAR_NAME', this.model.modelAdd.CALENDAR_NAME)
         data.append(
-          "CALENDAR_DATE_START",
-          moment(this.model.modelAdd.CALENDAR_DATE_START).format("YYYY-MM-DD")
-        );
+          'CALENDAR_DATE_START',
+          moment(this.model.modelAdd.CALENDAR_DATE_START).format('YYYY-MM-DD'),
+        )
         data.append(
-          "CALENDAR_DATE_END",
-          moment(this.model.modelAdd.CALENDAR_DATE_END).format("YYYY-MM-DD")
-        );
+          'CALENDAR_DATE_END',
+          moment(this.model.modelAdd.CALENDAR_DATE_END).format('YYYY-MM-DD'),
+        )
         data.append(
-          "CALENDAR_DESCRIPTION",
-          this.model.modelAdd.CALENDAR_DESCRIPTION
-        );
-        data.append("CREATE_BY", 1);
+          'CALENDAR_DESCRIPTION',
+          this.model.modelAdd.CALENDAR_DESCRIPTION,
+        )
+        data.append('CREATE_BY', 1)
         try {
-          console.log(data);
-          const response = await servicesModule0.createException(data);
-          this.getAllException();
-          this.$modals.simpleModal.$hide();
+          console.log(data)
+          const response = await servicesModule0.createException(data)
+          this.getAllException()
+          this.$modals.simpleModal.$hide()
         } catch (error) {
-          console.log(error);
+          console.log(error)
         }
       }
     },
 
-    async deleteException(data) {
+    async deleteException (data) {
       const response = await servicesModule0.deleteException(
-        data.SETTING_CALENDAR_ID
-      );
-      this.getAllException();
+        data.SETTING_CALENDAR_ID,
+      )
+      this.getAllException()
     },
 
-    uploadExcel(event) {
+    uploadExcel (event) {
       this.holidayList = [
         {
-          name: "name 1",
-          startDate: "22/11/2020",
-          finishDate: "22/11/2020"
+          name: 'name 1',
+          startDate: '22/11/2020',
+          finishDate: '22/11/2020',
         },
         {
-          name: "name 1",
-          startDate: "22/11/2020",
-          finishDate: "22/11/2020"
+          name: 'name 1',
+          startDate: '22/11/2020',
+          finishDate: '22/11/2020',
         },
         {
-          name: "name 1",
-          startDate: "22/11/2020",
-          finishDate: "22/11/2020"
+          name: 'name 1',
+          startDate: '22/11/2020',
+          finishDate: '22/11/2020',
         },
         {
-          name: "name 1",
-          startDate: "22/11/2020",
-          finishDate: "22/11/2020"
+          name: 'name 1',
+          startDate: '22/11/2020',
+          finishDate: '22/11/2020',
         },
         {
-          name: "name 1",
-          startDate: "22/11/2020",
-          finishDate: "22/11/2020"
+          name: 'name 1',
+          startDate: '22/11/2020',
+          finishDate: '22/11/2020',
         },
         {
-          name: "name 1",
-          startDate: "22/11/2020",
-          finishDate: "22/11/2020"
+          name: 'name 1',
+          startDate: '22/11/2020',
+          finishDate: '22/11/2020',
         },
         {
-          name: "name 1",
-          startDate: "22/11/2020",
-          finishDate: "22/11/2020"
+          name: 'name 1',
+          startDate: '22/11/2020',
+          finishDate: '22/11/2020',
         },
         {
-          name: "name 1",
-          startDate: "22/11/2020",
-          finishDate: "22/11/2020"
-        }
-      ];
-      window.scrollTo(0, document.body.scrollHeight);
-      console.log("file excel : " + this.$refs.excelFile.files);
+          name: 'name 1',
+          startDate: '22/11/2020',
+          finishDate: '22/11/2020',
+        },
+      ]
+      window.scrollTo(0, document.body.scrollHeight)
+      console.log('file excel : ' + this.$refs.excelFile.files)
     },
 
-    chooseFiles: function() {
-      document.getElementById("fileUpload").click();
-      console.log("filee");
-      console.log(this.$refs.excelFile[0]);
+    chooseFiles: function () {
+      document.getElementById('fileUpload').click()
+      console.log('filee')
+      console.log(this.$refs.excelFile[0])
     },
 
-    async editException(data) {
+    async editException (data) {
       const response = await servicesModule0.getExceptionById(
-        data.SETTING_CALENDAR_ID
-      );
-      this.$modals.simpleModalEdit.$show();
-      this.model.modelEdit = response;
+        data.SETTING_CALENDAR_ID,
+      )
+      this.$modals.simpleModalEdit.$show()
+      this.model.modelEdit = response
       // this.id = response.id;
       // this.model.editName = response.calendar_set_name;
       // this.model.editStartDate = response.calendar_set_start;
@@ -636,39 +637,39 @@ export default {
       // this.model.editDescription = response.calendar_set_desc;
     },
 
-    async editExceptionAPI() {
+    async editExceptionAPI () {
       try {
-        alert(this.model.modelEdit.CALENDAR_NAME);
-        const data = new FormData();
+        alert(this.model.modelEdit.CALENDAR_NAME)
+        const data = new FormData()
         data.append(
-          "SETTING_CALENDAR_ID",
-          this.model.modelEdit.SETTING_CALENDAR_ID
-        );
-        data.append("CALENDAR_NAME", this.model.modelEdit.CALENDAR_NAME);
+          'SETTING_CALENDAR_ID',
+          this.model.modelEdit.SETTING_CALENDAR_ID,
+        )
+        data.append('CALENDAR_NAME', this.model.modelEdit.CALENDAR_NAME)
         data.append(
-          "CALENDAR_DATE_START",
-          moment(this.model.modelEdit.CALENDAR_DATE_START).format("YYYY-MM-DD")
-        );
+          'CALENDAR_DATE_START',
+          moment(this.model.modelEdit.CALENDAR_DATE_START).format('YYYY-MM-DD'),
+        )
         data.append(
-          "CALENDAR_DATE_END",
-          moment(this.model.modelEdit.CALENDAR_DATE_END).format("YYYY-MM-DD")
-        );
+          'CALENDAR_DATE_END',
+          moment(this.model.modelEdit.CALENDAR_DATE_END).format('YYYY-MM-DD'),
+        )
         data.append(
-          "CALENDAR_DESCRIPTION",
-          this.model.modelEdit.CALENDAR_DESCRIPTION
-        );
-        data.append("CREATE_BY", 1);
-        data.append("_method", "PUT");
+          'CALENDAR_DESCRIPTION',
+          this.model.modelEdit.CALENDAR_DESCRIPTION,
+        )
+        data.append('CREATE_BY', 1)
+        data.append('_method', 'PUT')
 
-        const response = await servicesModule0.updateException(data);
-        this.getAllException();
+        const response = await servicesModule0.updateException(data)
+        this.getAllException()
         // this.$modals.simpleModal.$hide();
       } catch (error) {
-        console.log(error);
+        console.log(error)
       }
-    }
-  }
-};
+    },
+  },
+}
 </script>
 
 <style lang="scss">
