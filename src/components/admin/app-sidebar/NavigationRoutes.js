@@ -10,6 +10,89 @@ export const navigationRoutes = {
       iconClass: 'vuestic-iconset vuestic-iconset-dashboard',
     },
   },
+  // Patient Management
+  {
+    name: 'patient-management',
+    displayName: 'Patient Management',
+    meta: {
+      iconClass: 'fa fa-users',
+    },
+    disabled: true,
+    children: [{
+      name: 'patient-list',
+      displayName: 'Patient List',
+    },
+    {
+      name: 'patient-requestAppointmentList',
+      displayName: 'Request Appointment List',
+    },
+    {
+      name: 'patient-appointmentList',
+      displayName: 'Appointment List',
+    },
+    {
+      name: 'patient-screeningList',
+      displayName: 'Screening List',
+    },
+    {
+      name: 'patient-appointmentBooking',
+      displayName: 'Book New Appointment',
+    },
+    {
+      name: 'calendar_management',
+      displayName: 'Appointment Calendar',
+    },
+    ],
+  },
+  // SHARRP Management
+  {
+    name: 'SHHARP-management',
+    displayName: 'SHHARP Management',
+    meta: {
+      iconClass: 'vuestic-iconset vuestic-iconset-extras',
+    },
+    disabled: true,
+    children: [{
+      name: 'shharp-list',
+      displayName: 'SHHARP List',
+    },
+    ],
+  },
+  // Staff Management
+  {
+    name: 'staff-management',
+    displayName: 'Staff Management',
+    meta: {
+      iconClass: 'fa fa-user-circle-o',
+    },
+    disabled: true,
+    children: [{
+      name: 'main',
+      displayName: 'User List',
+    },
+    {
+      name: 'newStaff',
+      displayName: 'New Staff Registration',
+    },
+    ],
+  },
+  {
+    name: 'company-management',
+    displayName: 'Company Management',
+    meta: {
+      iconClass: 'vuestic-iconset vuestic-iconset-dashboard',
+    },
+    disabled: true,
+    children: [{
+      name: 'CEO Company List',
+      displayName: 'CEO Company List',
+    },
+    {
+      name: 'Candidate Appeal',
+      displayName: 'Candidate Appeal',
+    },
+    ],
+  },
   // System Setting
   {
     name: 'system-setting',
@@ -61,89 +144,6 @@ export const navigationRoutes = {
     {
       name: 'calendarSetting',
       displayName: 'Calendar Setting',
-    },
-    ],
-  },
-  // Staff Management
-  {
-    name: 'staff-management',
-    displayName: 'Staff Management',
-    meta: {
-      iconClass: 'fa fa-user-circle-o',
-    },
-    disabled: true,
-    children: [{
-      name: 'main',
-      displayName: 'User List',
-    },
-    {
-      name: 'newStaff',
-      displayName: 'New Staff Registration',
-    },
-    ],
-  },
-  // Patient Management
-  {
-    name: 'patient-management',
-    displayName: 'Patient Management',
-    meta: {
-      iconClass: 'fa fa-users',
-    },
-    disabled: true,
-    children: [{
-      name: 'patient-list',
-      displayName: 'Patient List',
-    },
-    {
-      name: 'patient-requestAppointmentList',
-      displayName: 'Request Appointment List',
-    },
-    {
-      name: 'patient-appointmentList',
-      displayName: 'Appointment List',
-    },
-    {
-      name: 'patient-screeningList',
-      displayName: 'Screening List',
-    },
-    {
-      name: 'patient-appointmentBooking',
-      displayName: 'Book New Appointment',
-    },
-    {
-      name: 'calendar_management',
-      displayName: 'Appointment Calendar',
-    },
-    ],
-  },
-  // SHARRP Management
-  {
-    name: 'SHHARP-management',
-    displayName: 'SHHARP Management',
-    meta: {
-      iconClass: 'vuestic-iconset vuestic-iconset-extras',
-    },
-    disabled: true,
-    children: [{
-      name: 'shharp-list',
-      displayName: 'SHHARP List',
-    },
-    ],
-  },
-  {
-    name: 'company-management',
-    displayName: 'Company Management',
-    meta: {
-      iconClass: 'vuestic-iconset vuestic-iconset-dashboard',
-    },
-    disabled: true,
-    children: [{
-      name: 'CEO Company List',
-      displayName: 'CEO Company List',
-    },
-    {
-      name: 'Candidate Appeal',
-      displayName: 'Candidate Appeal',
     },
     ],
   },
